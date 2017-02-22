@@ -139,8 +139,8 @@
   <string name="is_sticky_extesion_keyboard_on_summary">يبقى مرئي حتى الاغلاق الواضح</string>
   <string name="is_sticky_extesion_keyboard_off_summary">اغلقه بعد ضغط المفتاح</string>
   <string name="is_extesion_keyboard_above_keyboard">اعلى امتداد للوحة المفاتيح</string>
-  <string name="is_extesion_keyboard_above_keyboard_on_summary">الرسم فوق لوحة المفاتيح الرئيسية</string>
-  <string name="is_extesion_keyboard_above_keyboard_off_summary">الرسم على لوحة المفاتيح الرئيسية</string>
+  
+  
   <string name="show_settings_app_in_launcher">اعدادات التطبيق </string>
   <string name="settings_key_show_settings_app_off_summary">إخفاء إعدادات التطبيق (قد يحتاج إلى إعادة تشغيل)</string>
   <string name="show_crash_notification">أبلغ عن تصادم </string>
@@ -192,8 +192,8 @@
   <string name="bottom_generic_row_group">الصف السفلي المشترك</string>
   <string name="bottom_generic_row_dialog_title">إختر نوع الصف</string>
   <string name="bottom_generic_row_list_title">إختر نوع الصف</string>
-  <string name="extension_keyboard_group">لوحة مفاتيح موسعة</string>
-  <string name="extension_keyboard_dialog_title">حدد لوحة المفاتيح</string>
+  
+  
   <string name="keyboard_theme_group">خلفيات لوحة المفاتيح</string>
   <string name="keyboard_theme_dialog_title">اختر سمة</string>
   <string name="keyboard_theme_list_title">إختر السمة </string>
@@ -255,9 +255,9 @@
   <string name="workaround_disable_rtl_fix">تعطيل التحكم من اليمين لليسار</string>
   <string name="workaround_disable_rtl_fix_summary_on">استخدم نظام اليمين الى اليسار(لهواتف سوني إريكسون):</string>
   <string name="workaround_disable_rtl_fix_summary_off">استخدم تعامل يمين-الى-يسارالخاص بAnySoftKeyboard </string>
-  <string name="settings_split_state_title">تقسيم / دمج الحالة الأولية</string>
+  
   <string name="settings_split_state_merged_always">بداية عادية</string>
-  <string name="settings_split_state_split_in_landscape">بدء التقسيم بشكل طبيعي</string>
+  
   <string name="settings_split_state_split_always">بدء التقسيم</string>
   <string name="user_dictionary_select_locale">اللغة</string>
   <string name="user_dict_settings_titlebar">قاموس المستخدم</string>

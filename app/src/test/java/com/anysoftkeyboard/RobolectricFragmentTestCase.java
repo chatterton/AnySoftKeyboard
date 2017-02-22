@@ -37,7 +37,7 @@ public abstract class RobolectricFragmentTestCase<T extends Fragment> {
         mFragmentController = SupportFragmentController.of(fragment, MainSettingsActivity.class).attach();
 
         mFragmentController.create(R.id.main_ui_content, state);
-        if (state != null) mFragmentController.get().onViewStateRestored(state);
+        //if (state != null) mFragmentController.get().onViewStateRestored(state);
         mFragmentController.start().resume().visible();
 
         ensureAllScheduledJobsAreDone();
@@ -45,7 +45,11 @@ public abstract class RobolectricFragmentTestCase<T extends Fragment> {
         return fragment;
     }
 
-    private void ensureAllScheduledJobsAreDone() {
+    protected SupportFragmentController<T> getFragmentController() {
+        return mFragmentController;
+    }
+
+    protected void ensureAllScheduledJobsAreDone() {
         while (Robolectric.getForegroundThreadScheduler().size() > 0 || Robolectric.getBackgroundThreadScheduler().size() > 0) {
             Robolectric.flushBackgroundThreadScheduler();
             Robolectric.flushForegroundThreadScheduler();

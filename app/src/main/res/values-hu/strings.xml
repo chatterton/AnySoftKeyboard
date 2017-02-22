@@ -178,8 +178,8 @@ törlődik, teljesen lenyomva az utolsó szó</string>
   <string name="is_sticky_extesion_keyboard_on_summary">Látható marad amíg be nem zárják</string>
   <string name="is_sticky_extesion_keyboard_off_summary">Bezárul az első gombnyomás után</string>
   <string name="is_extesion_keyboard_above_keyboard">Felső kiegészítő billentyűzet</string>
-  <string name="is_extesion_keyboard_above_keyboard_on_summary">Megjelenítés a fő billentyűzet felett</string>
-  <string name="is_extesion_keyboard_above_keyboard_off_summary">Megjelenítés a fő billentyűzeten</string>
+  
+  
   
   
   
@@ -252,9 +252,9 @@ törlődik, teljesen lenyomva az utolsó szó</string>
   <string name="bottom_generic_row_dialog_title">Válassza ki a sor típusát</string>
   <string name="bottom_generic_row_summary">Kiválasztott alsó sor: %s</string>
   <string name="bottom_generic_row_list_title">Válaszd ki a sor típusát</string>
-  <string name="extension_keyboard_group">Kiegészítő billentyűzet</string>
-  <string name="extension_keyboard_dialog_title">Válassz billentyűzetet</string>
-  <string name="extension_keyboard_summary">Kiválasztott Kiegészítő Billentyűzet: %s</string>
+  
+  
+  
   <string name="keyboard_theme_group">Billentyűzet témák</string>
   <string name="keyboard_theme_dialog_title">Téma kiválasztása</string>
   <string name="keyboard_theme_summary">Kiválasztott téma: %s</string>
@@ -317,10 +317,10 @@ törlődik, teljesen lenyomva az utolsó szó</string>
   <string name="workaround_disable_rtl_fix">Jobbról-balra mód tiltása</string>
   <string name="workaround_disable_rtl_fix_summary_on">Rendszer J-B mód használata (SE telefonok)</string>
   <string name="workaround_disable_rtl_fix_summary_off">AnySoftKeyboard J-B mód használata</string>
-  <string name="settings_split_state_title">Osztott/hagyományos kezdeti elrednezés</string>
+  
   <string name="settings_split_state_summary">Határozd meg a billentyűzet alapfelosztását. Jelenlegi: %s</string>
   <string name="settings_split_state_merged_always">Hagyományos</string>
-  <string name="settings_split_state_split_in_landscape">Fekvőben osztott</string>
+  
   <string name="settings_split_state_split_always">Mindig osztott</string>
   <string name="user_dictionary_select_locale">Nyelv:</string>
   <string name="user_dict_settings_titlebar">Felhasználói szótár</string>

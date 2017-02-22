@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.widget.PopupWindow;
 
+import com.anysoftkeyboard.SharedPrefsHelper;
 import com.anysoftkeyboard.ViewTestUtils;
 import com.anysoftkeyboard.api.KeyCodes;
 import com.anysoftkeyboard.keyboards.AnyKeyboard;
@@ -20,6 +21,9 @@ import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowSystemClock;
+
+import static com.anysoftkeyboard.keyboards.Keyboard.EDGE_LEFT;
+import static com.anysoftkeyboard.keyboards.Keyboard.EDGE_RIGHT;
 
 @RunWith(RobolectricTestRunner.class)
 public class AnyKeyboardViewTest extends AnyKeyboardViewWithMiniKeyboardTest {
@@ -132,6 +136,17 @@ public class AnyKeyboardViewTest extends AnyKeyboardViewWithMiniKeyboardTest {
     }
 
     @Test
+    public void testSlideToExtensionKeyboardWhenDisabled() {
+        SharedPrefsHelper.setPrefsValue(R.string.settings_key_extension_keyboard_enabled, false);
+        ShadowSystemClock.sleep(1225);
+        Assert.assertNull(ShadowApplication.getInstance().getLatestPopupWindow());
+        ViewTestUtils.navigateFromTo(mViewUnderTest, new Point(10, 10), new Point(10, -20), 200, true, false);
+
+        PopupWindow currentlyShownPopup = ShadowApplication.getInstance().getLatestPopupWindow();
+        Assert.assertNull(currentlyShownPopup);
+    }
+
+    @Test
     public void testSwipeUpToUtilitiesKeyboard() {
         ShadowSystemClock.sleep(1225);
         Assert.assertNull(ShadowApplication.getInstance().getLatestPopupWindow());
@@ -192,5 +207,32 @@ public class AnyKeyboardViewTest extends AnyKeyboardViewWithMiniKeyboardTest {
         inOrder.verify(mMockKeyboardListener).onPress(KeyCodes.ENTER);
         inOrder.verify(mMockKeyboardListener).onKey(Mockito.eq(KeyCodes.SETTINGS), Mockito.any(Keyboard.Key.class), Mockito.anyInt(), Mockito.any(int[].class), Mockito.anyBoolean());
         inOrder.verifyNoMoreInteractions();
+    }
+
+    @Test
+    public void testEdgeTouchLeftKeyA() {
+        AnyKeyboard.AnyKey edgeKey = findKey('a');
+        Assert.assertNotNull(edgeKey);
+        Assert.assertEquals(EDGE_LEFT, edgeKey.edgeFlags);
+
+        final Point edgeTouchPoint = new Point(0, edgeKey.y + 5);
+        Assert.assertTrue(edgeKey.isInside(edgeTouchPoint.x, edgeTouchPoint.y));
+        Assert.assertTrue(edgeTouchPoint.x < edgeKey.x);
+
+        ViewTestUtils.navigateFromTo(mViewUnderTest, edgeTouchPoint, edgeTouchPoint, 40, true, true);
+        Mockito.verify(mMockKeyboardListener).onKey(Mockito.eq((int) 'a'), Mockito.same(edgeKey), Mockito.eq(0), Mockito.any(int[].class), Mockito.eq(true));
+    }
+
+    @Test
+    public void testEdgeTouchRightKeyL() {
+        AnyKeyboard.AnyKey edgeKey = findKey('l');
+        Assert.assertNotNull(edgeKey);
+        Assert.assertEquals(EDGE_RIGHT, edgeKey.edgeFlags);
+
+        final Point edgeTouchPoint = new Point(mViewUnderTest.getThemedKeyboardDimens().getKeyboardMaxWidth() - 1, edgeKey.y + 5);
+        Assert.assertTrue(edgeKey.isInside(edgeTouchPoint.x, edgeTouchPoint.y));
+        Assert.assertTrue(edgeTouchPoint.x > edgeKey.x + edgeKey.width + edgeKey.gap);
+
+        ViewTestUtils.navigateFromTo(mViewUnderTest, edgeTouchPoint, edgeTouchPoint, 40, true, true);
     }
 }

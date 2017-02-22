@@ -93,15 +93,14 @@
   <string name="one_shot_quick_text_popup_off_summary">Ohrani pojavno hitro besedilo odprto dokler ne pritisnem na tipko Zapri</string>
   <string name="quick_text_tags_search">Predlagaj izrazne ikone s tipkanjem oznak</string>
   <string name="quick_text_tags_search_on_summary">Išči izrazne ikone z oznako, ko se tipkanje začne z dvopičjem (:)</string>
-  <string name="quick_text_tags_search_off_summary"></string>
   <string name="hide_soft_when_physical">Skrivanje tipkovnice ob pritisku na fizično tipko</string>
   <string name="hide_soft_when_physical_on_summary">Skrij zaslonsko tipkovnico, ko se uporablja fizična tipkovnica</string>
   <string name="hide_soft_when_physical_off_summary">Prikaži zaslonsko tipkovnico, ko se uporablja fizična tipkovnica</string>
   <string name="fullscreen_input_connection_supported">Uporabi ležeči celozaslonski način</string>
-  <string name="fullscreen_input_connection_supported_on_summary">Celozaslonski vnos v ležečem načinu</string>
+  <string name="fullscreen_input_connection_supported_on_summary">Prevzemi zaslon med vnašanjem besedila v ležečem načinu</string>
   <string name="fullscreen_input_connection_supported_off_summary">Ne uporabi celozaslonskega vnosa v ležečem načinu</string>
   <string name="fullscreen_portrait_input_connection_supported">Uporabi pokončni celozaslonski način</string>
-  <string name="fullscreen_portrait_input_connection_supported_on_summary">Celozaslonski vnos v pokončnem načinu</string>
+  <string name="fullscreen_portrait_input_connection_supported_on_summary">Prevzemi zaslon med vnašanjem besedila v pokončnem načinu</string>
   <string name="fullscreen_portrait_input_connection_supported_off_summary">Ne uporabi celozaslonskega vnosa v pokončnem načinu
     </string>
   <string name="backword_support">Podpora za brisanje besed</string>
@@ -196,7 +195,6 @@
   <string name="special_dictionaries_group_summary">Slovarji predlogov, ki se uporabljajo v AnySoftKeyboardu</string>
   <string name="use_user_dictionary">Uporabniški slovar</string>
   <string name="use_user_dictionary_on_summary">Predlagaj uporabniško dodane besede (dvokliknite vtipkani predlog za dodajanje)</string>
-  <string name="use_user_dictionary_off_summary"></string>
   <string name="always_use_fallback_user_dictionary">Uporabi zasilni uporabniški slovar</string>
   <string name="always_use_fallback_user_dictionary_on_summary">Uporabi samo AnySoftKeyboardov vgrajeni mehanizem za uporabniški slovar (ni priporočljivo).</string>
   <string name="always_use_fallback_user_dictionary_off_summary">Najprej poizkusi uporabiti Androidov vgrajeni uporabniški slovar (priporočljivo).</string>
@@ -225,7 +223,6 @@
   <string name="auto_pick_suggestion_aggressiveness_summary">Raven napadalnosti: %s</string>
   <string name="use_contacts_dictionary">Slovar stikov</string>
   <string name="use_contacts_dictionary_on_summary">Predlagaj imena iz imenika</string>
-  <string name="use_contacts_dictionary_off_summary"></string>
   <string name="tweaks_group">Podr. nast.</string>
   <string name="tweak_sound_group">Podrobne nastavitve povezane z zvokom</string>
   <string name="tweak_physical_keyboard_group">Podrobne nastavitve povezane s tipkovnico</string>
@@ -264,8 +261,6 @@
   <string name="show_keyboard_icon_in_status_bar_on_summary">Prikaže ikono tipkovnice v vrstici stanja.</string>
   <string name="show_keyboard_icon_in_status_bar_off_summary">Brez ikone vrstice stanja.</string>
   <string name="is_extesion_keyboard_above_keyboard">Zgornja razširjena tipkovnica</string>
-  <string name="is_extesion_keyboard_above_keyboard_on_summary">Se izriše nad glavno tipkovnico</string>
-  <string name="is_extesion_keyboard_above_keyboard_off_summary">Se izriše na glavni tipkovnici</string>
   <string name="show_settings_app_in_launcher">Program za nastavitve</string>
   <string name="settings_key_show_settings_app_on_summary">Program za nastavitve bo viden v zaganjalniku (lahko
         zahteva ponovni zagon)
@@ -297,7 +292,6 @@
   <string name="insert_space_after_word_suggestion_selection">Presledek po izbiri predloga</string>
   <string name="insert_space_after_word_suggestion_selection_on_summary">Vstavi presledek po izbiri predloga besede
     </string>
-  <string name="insert_space_after_word_suggestion_selection_off_summary"></string>
   <string name="double_space_to_period">Dvojni presledek za piko</string>
   <string name="double_space_to_period_summary">Dvojni tap na preslednico vstavi piko + presledek</string>
   <string name="tweak_animations_level_title">Animacije</string>
@@ -339,7 +333,6 @@
   <string name="quick_text_keys_order">Vrstni red skupin za hitro besedilo</string>
   <string name="quick_text_keys_order_dialog_title">Določite vrstni red skupin</string>
   <string name="quick_text_keys_order_summary">Vrstni red, v katerem bodo prikazane skupine za hitro besedilo.</string>
-  <!-- settings - extension keyboards -->
   <!-- settings - top generic row -->
   <string name="top_generic_row_group">Splošna zgornja vrstica</string>
   <string name="top_generic_row_dialog_title">Izberite vrsto vrstice</string>
@@ -350,10 +343,6 @@
   <string name="bottom_generic_row_dialog_title">Izberite vrsto vrstice</string>
   <string name="bottom_generic_row_summary">Izbrana spodnja vrstica: %s</string>
   <string name="bottom_generic_row_list_title">Izberite vrsto vrstice</string>
-  <!-- settings - extension keyboard -->
-  <string name="extension_keyboard_group">Razširjena tipkovnica</string>
-  <string name="extension_keyboard_dialog_title">Izberite tipkovnico</string>
-  <string name="extension_keyboard_summary">Izbrana razširjena tipkovnica: %s</string>
   <string name="keyboard_theme_group">Teme tipkovnice</string>
   <string name="keyboard_themes_group_summary">Razne teme za videz zaslonske tipkovnice</string>
   <string name="keyboard_theme_dialog_title">Izberite temo</string>
@@ -452,15 +441,14 @@
   <string name="workaround_disable_rtl_fix">Onemogoči pisanje od desne proti levi</string>
   <string name="workaround_disable_rtl_fix_summary_on">Uporabi sistemsko pisanje od desne proti levi (za telefone SE)</string>
   <string name="workaround_disable_rtl_fix_summary_off">Uporabi AnySoftKeyboardovo pisanje od desne proti levi</string>
-  <string name="settings_split_state_title">Razcepi/Združi začetno stanje</string>
+  <string name="settings_split_state_title_portrait">Razcepi/Združi začetno stanje (pokončno)</string>
+  <string name="settings_split_state_title_landscape">Razcepi/Združi začetno stanje (ležeče)</string>
   <string name="settings_split_state_summary">Določi privzeto razcepitev tipkovnice. Trenutno: %s</string>
   <string name="settings_split_state_merged_always">Zaženi običajno</string>
-  <string name="settings_split_state_split_in_landscape">Zaženi razcepljeno v ležečem načinu</string>
   <string name="settings_split_state_split_always">Zaženi razcepljeno</string>
   <string name="settings_split_state_compact_right_always">Zaženi strnjeno na desni</string>
   <string name="settings_split_state_compact_left_always">Zaženi strnjeno na levi</string>
   <!-- User dictionary settings -->
-  <skip></skip>
   <string name="user_dictionary_select_locale">Jezik:</string>
   <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
   <string name="user_dict_settings_titlebar">Uporabniški slovar</string>
@@ -545,8 +533,10 @@
   <string name="setup_wizard_step_two_small_sub_title">Korak dva od treh</string>
   <string name="setup_wizard_step_two_details">Vaš sistem lahko sedaj uporablja <i>AnySoftKeyboard</i>, vendar ni nastavljen kot dejavna tipkovnica.\nS preklopom bo <i>AnySoftKeyboard</i> skupaj z vsemi njenimi značilnostmi vaša nova zaslonska tipkovnica!</string>
   <string name="setup_wizard_step_two_action">Preklopi dejavne tipkovnice</string>
-  <string name="setup_wizard_step_three_title">AnySoftKeyboard je pripravljen!</string>
-  <string name="setup_wizard_step_three_details">Hvala, ker ste izbrali <i>AnySoftKeyboard</i>.\nTa tipkovnica blesti v svojih načinih prilagajanja. Pojdite korak naprej in jo poosebite:</string>
+  <string name="setup_wizard_step_three_title">Kaj sledi</string>
+  <string name="setup_wizard_step_three_details">Hvala, ker ste izbrali <i>AnySoftKeyboard</i>.</string>
+  <string name="setup_wizard_step_three_details_done"><b>Končali ste 🎉\nPojdite v svoj priljubljen program in ga preizkusite.</b></string>
+  <string name="setup_wizard_step_three_details_actions">Tipkovnico lahko prilagodite po svojem okusu:</string>
   <string name="setup_wizard_step_three_action_languages">Nastavitev jezikov …</string>
   <string name="setup_wizard_step_three_action_themes">Izberi temo …</string>
   <string name="setup_wizard_step_three_action_all_settings">Nastavi vse ostalo …</string>
@@ -579,6 +569,7 @@
   <string name="notification_read_contacts_text">Za boljšo izkušnjo samodokončanja potrebujemo vaše dovoljenje za branje stikov.</string>
   <string name="notification_read_contacts_ticker">Potrebno dovoljenje za stike</string>
   <string name="contacts_permissions_dialog_message">AnySoftKeyboard uporablja imena vaših stikov, da ponudi bolj poosebljene predloge za besede: med tipkanjem iščemo podobne besede za samodokončanje in samopopravilo vašega tipkanja.</string>
+  <string name="wizard_allow_contacts_permission">Dovoli predloge osnovane na stikih</string>
   <string name="allow_permission">Dovoli</string>
   <string name="navigate_to_app_permissions">Pojdite v dovoljena programa</string>
   <string name="turn_off_contacts_dictionary">Izklopi slovar stikov</string>
@@ -600,4 +591,8 @@
   <string name="app_shortcut_ui_tweaks_disabled">Krmarjenje po nastavitvah up. vmesnika onemogočeno</string>
   <string name="app_shortcut_ui_tweaks_long_label">Nastavi dodatne značilnosti up. vmesnika</string>
   <string name="app_shortcut_ui_tweaks_short_label">Več nastavitev up. vmesnika</string>
+  <string name="extension_keyboard_enabled_off_summary">Razširjena tipkovnica onemogočena.</string>
+  <string name="extension_keyboard_enabled_on_summary">Razširjena tipkovnica se bo prikazala, ko potegnete nad tipkovnico.</string>
+  <string name="read_our_privacy_policy">Preberite naš pravilnik o zasebnosti …</string>
+  <string name="visit_our_web_site">Obiščite našo spletno stran …</string>
 </resources>

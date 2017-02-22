@@ -35,6 +35,7 @@ compile:
 
 test:
   override:
+    - docker run ${DOCKER_ARGS} ${DOCKER_MOUNTS} ${DOCKER_IMAGE} /opt/workspace/scripts/ci_check.sh
     - docker run ${DOCKER_ARGS} ${DOCKER_MOUNTS} ${DOCKER_IMAGE} /opt/workspace/scripts/ci_test.sh
   post:
     - mkdir -p $CIRCLE_ARTIFACTS/lint/app

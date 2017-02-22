@@ -49,6 +49,7 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,11 +57,13 @@ import android.widget.Toast;
 import com.anysoftkeyboard.api.KeyCodes;
 import com.anysoftkeyboard.base.dictionaries.Dictionary;
 import com.anysoftkeyboard.base.dictionaries.WordComposer;
+import com.anysoftkeyboard.base.utils.CompatUtils;
 import com.anysoftkeyboard.dictionaries.DictionaryAddOnAndBuilder;
 import com.anysoftkeyboard.dictionaries.ExternalDictionaryFactory;
 import com.anysoftkeyboard.dictionaries.TextEntryState;
 import com.anysoftkeyboard.dictionaries.sqlite.AutoDictionary;
 import com.anysoftkeyboard.ime.AnySoftKeyboardWithQuickText;
+import com.anysoftkeyboard.ime.InputViewBinder;
 import com.anysoftkeyboard.keyboards.AnyKeyboard;
 import com.anysoftkeyboard.keyboards.AnyKeyboard.HardKeyboardTranslator;
 import com.anysoftkeyboard.keyboards.CondenseType;
@@ -70,6 +73,7 @@ import com.anysoftkeyboard.keyboards.KeyboardSwitcher;
 import com.anysoftkeyboard.keyboards.KeyboardSwitcher.NextKeyboardType;
 import com.anysoftkeyboard.keyboards.physical.HardKeyboardActionImpl;
 import com.anysoftkeyboard.keyboards.physical.MyMetaKeyKeyListener;
+import com.anysoftkeyboard.keyboards.views.AnyKeyboardView;
 import com.anysoftkeyboard.keyboards.views.CandidateView;
 import com.anysoftkeyboard.quicktextkeys.QuickKeyHistoryRecords;
 import com.anysoftkeyboard.receivers.PackagesChangedReceiver;
@@ -182,6 +186,8 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
     //a year ago.
     private static final long NEVER_TIME_STAMP = (-1L) * (365L * 24L * 60L * 60L * 1000L);
     private long mLastSpaceTimeStamp = NEVER_TIME_STAMP;
+    private View mFullScreenExtractView;
+    private EditText mFullScreenExtractTextView;
 
     public AnySoftKeyboard() {
         super();
@@ -464,24 +470,18 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
     }
 
     @Override
-    public void hideWindow() {
-        super.hideWindow();
-
-        TextEntryState.restartSession();
-    }
-
-    @Override
     public void onFinishInput() {
         super.onFinishInput();
         //properly finished input. Next time we DO want to show the keyboard view
         mLastEditorIdPhysicalKeyboardWasUsed = 0;
 
-        hideWindow();
-
         if (mShowKeyboardIconInStatusBar) {
             mInputMethodManager.hideStatusIcon(mImeToken);
         }
         mKeyboardHandler.sendEmptyMessageDelayed(KeyboardUIStateHandler.MSG_CLOSE_DICTIONARIES, CLOSE_DICTIONARIES_DELAY);
+
+        final InputViewBinder inputView = getInputView();
+        if (inputView != null) inputView.closing();
     }
 
     /*
@@ -1300,7 +1300,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
                 }
                 break;
             case KeyCodes.CANCEL:
-                handleClose();
+                hideWindow();
                 break;
             case KeyCodes.SETTINGS:
                 showOptionsMenu();
@@ -1560,6 +1560,29 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
                         getKeyboardSwitcher().nextAlphabetKeyboard(currentEditorInfo, id.toString());
                     }
                 });
+    }
+
+    @Override
+    public View onCreateExtractTextView() {
+        mFullScreenExtractView = super.onCreateExtractTextView();
+        if (mFullScreenExtractView != null) {
+            mFullScreenExtractTextView = (EditText) mFullScreenExtractView.findViewById(android.R.id.inputExtractEditText);
+        }
+
+        return mFullScreenExtractView;
+    }
+
+    @Override
+    public void updateFullscreenMode() {
+        super.updateFullscreenMode();
+        InputViewBinder inputViewBinder = getInputView();
+        if (mFullScreenExtractView != null && inputViewBinder != null) {
+            final AnyKeyboardView anyKeyboardView = (AnyKeyboardView) inputViewBinder;
+            CompatUtils.setViewBackgroundDrawable(mFullScreenExtractView, anyKeyboardView.getBackground());
+            if (mFullScreenExtractTextView != null) {
+                mFullScreenExtractTextView.setTextColor(anyKeyboardView.getKeyTextColor());
+            }
+        }
     }
 
     public void onText(Key key, CharSequence text) {
@@ -1891,16 +1914,26 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
         }
     }
 
-    protected void handleClose() {
-        boolean closeSelf = true;
+    @Override
+    protected boolean handleCloseRequest() {
+        TextEntryState.restartSession();
 
-        if (getInputView() != null)
-            closeSelf = getInputView().closing();
-
-        if (closeSelf) {
-            requestHideSelf(0);
-            abortCorrectionAndResetPredictionState(true);
+        if (!super.handleCloseRequest()) {
+            if (getInputView() != null && getInputView().closing()) {
+                //we return FALSE here, since we are not handling the closing
+                //internally
+                return false;
+            }
         }
+
+        return true;
+    }
+
+    @Override
+    public void onWindowHidden() {
+        super.onWindowHidden();
+
+        abortCorrectionAndResetPredictionState(true);
     }
 
     private void postUpdateSuggestions() {
@@ -2072,8 +2105,8 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
      * retrieval.
      *
      * @param wordToCommit the suggestion picked by the user to be committed to the text
-     *                   field
-     * @param correcting this is a correction commit
+     *                     field
+     * @param correcting   this is a correction commit
      */
     protected void commitWordToInput(@NonNull CharSequence wordToCommit, boolean correcting) {
         mWord.setPreferredWord(wordToCommit);
@@ -2114,7 +2147,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
     }
 
     public void revertLastWord() {
-        final int length = mCommittedWord.length() + (mJustAddedAutoSpace? 1 : 0);
+        final int length = mCommittedWord.length() + (mJustAddedAutoSpace ? 1 : 0);
         if (length > 0) {
             mAutoCorrectOn = false;
             //note: typedWord may be empty
@@ -2362,7 +2395,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
                 calculatedCommonalityMaxLengthDiff, calculatedCommonalityMaxDistance,
                 sp.getInt(getString(R.string.settings_key_min_length_for_word_correction__), 2));
 
-        setInitialCondensedState(getResources().getConfiguration());
+        setInitialCondensedState(sp, getResources().getConfiguration());
     }
 
     private void setDictionariesForCurrentKeyboard() {
@@ -2405,7 +2438,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
     }
 
     private void launchSettings() {
-        handleClose();
+        hideWindow();
         Intent intent = new Intent();
         intent.setClass(AnySoftKeyboard.this, MainSettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -2498,7 +2531,7 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation != mOrientation) {
             mOrientation = newConfig.orientation;
-            setInitialCondensedState(newConfig);
+            setInitialCondensedState(getSharedPrefs(), newConfig);
 
             abortCorrectionAndResetPredictionState(false);
 
@@ -2511,25 +2544,27 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
         }
     }
 
-    private void setInitialCondensedState(Configuration newConfig) {
-        final String defaultCondensed = mAskPrefs.getInitialKeyboardCondenseState();
+    private void setInitialCondensedState(SharedPreferences sp, Configuration configuration) {
+        final int settingsKeyResId = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE?
+                R.string.settings_key_default_split_state_landscape : R.string.settings_key_default_split_state_portrait;
+        final String initialKeyboardCondenseState = sp.getString(getString(settingsKeyResId), getString(R.string.settings_default_default_split_state));
+
+        final CondenseType previousCondenseType = mKeyboardInCondensedMode;
         mKeyboardInCondensedMode = CondenseType.None;
-        switch (defaultCondensed) {
-            case "split_always":
+        switch (initialKeyboardCondenseState) {
+            case "split":
                 mKeyboardInCondensedMode = CondenseType.Split;
                 break;
-            case "split_in_landscape":
-                if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-                    mKeyboardInCondensedMode = CondenseType.Split;
-                else
-                    mKeyboardInCondensedMode = CondenseType.None;
-                break;
-            case "compact_right_always":
+            case "compact_right":
                 mKeyboardInCondensedMode = CondenseType.CompactToRight;
                 break;
-            case "compact_left_always":
+            case "compact_left":
                 mKeyboardInCondensedMode = CondenseType.CompactToLeft;
                 break;
+        }
+        if (previousCondenseType != mKeyboardInCondensedMode) {
+            getKeyboardSwitcher().flushKeyboardsCache();
+            resetKeyboardView(false);
         }
     }
 
@@ -2555,7 +2590,8 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
                 key.equals(getString(R.string.settings_key_long_press_timeout)) ||
                 key.equals(getString(R.string.settings_key_multitap_timeout)) ||
                 key.equals(getString(R.string.settings_key_always_hide_language_key)) ||
-                key.equals(getString(R.string.settings_key_default_split_state)) ||
+                key.equals(getString(R.string.settings_key_default_split_state_portrait)) ||
+                key.equals(getString(R.string.settings_key_default_split_state_landscape)) ||
                 key.equals(getString(R.string.settings_key_support_password_keyboard_type_state))) {
             //this will recreate the keyboard view AND flush the keyboards cache.
             resetKeyboardView(true);
@@ -2617,8 +2653,9 @@ public abstract class AnySoftKeyboard extends AnySoftKeyboardWithQuickText imple
     }
 
     public void resetKeyboardView(boolean recreateView) {
-        handleClose();
+        hideWindow();
         if (recreateView) {
+            getKeyboardSwitcher().flushKeyboardsCache();
             // also recreate keyboard view
             setInputView(onCreateInputView());
             setCandidatesView(onCreateCandidatesView());
