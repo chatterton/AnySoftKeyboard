@@ -18,17 +18,15 @@
     </Row>
 
     <Row>
-        <Key android:codes="a" android:popupCharacters="\@àáâãäåæą" ask:hintLabel="\@" android:keyEdgeFlags="left"/>
-        <Key android:codes="s" android:popupCharacters="$§ßśŝš" ask:hintLabel="$"/>
-        <Key android:codes="d" android:popupCharacters="#%đď" ask:hintLabel="# %"/>
-        <Key android:codes="f" android:popupCharacters="^\u0026" ask:hintLabel="^ \u0026"/>
-        <Key android:codes="g" android:popupCharacters="`°ĝ" ask:hintLabel="` °"/>
-        <Key android:codes="h" android:popupCharacters="_~ĥ" ask:hintLabel="_ ~"/>
-        <Key android:codes="j" android:popupCharacters="\\|ĵ" ask:hintLabel="\\ |"/>
-        <Key android:codes="k" android:popupCharacters="([{" ask:hintLabel="("/>
-        <Key android:codes="l" android:popupCharacters="ľĺł£)]}" ask:hintLabel=")"/>
-        <Key ask:isFunctional="true" android:codes="\u0027" android:popupCharacters="\u0022"
-             android:keyEdgeFlags="right"/>
+        <Key android:codes="a" android:keyWidth="11%p" android:popupCharacters="\@àáâãäåæą" ask:hintLabel="\@" android:keyEdgeFlags="left"/>
+        <Key android:codes="s" android:keyWidth="11%p" android:popupCharacters="$§ßśŝš" ask:hintLabel="$"/>
+        <Key android:codes="d" android:keyWidth="11%p" android:popupCharacters="#%đď" ask:hintLabel="# %"/>
+        <Key android:codes="f" android:keyWidth="11%p" android:popupCharacters="^\u0026" ask:hintLabel="^ \u0026"/>
+        <Key android:codes="g" android:keyWidth="11%p" android:popupCharacters="`°ĝ" ask:hintLabel="` °"/>
+        <Key android:codes="h" android:keyWidth="11%p" android:popupCharacters="_~ĥ" ask:hintLabel="_ ~"/>
+        <Key android:codes="j" android:keyWidth="11%p" android:popupCharacters="\\|ĵ" ask:hintLabel="\\ |"/>
+        <Key android:codes="k" android:keyWidth="11%p" android:popupCharacters="([{" ask:hintLabel="("/>
+        <Key android:codes="l" android:keyWidth="11%p" android:popupCharacters="ľĺł£)]}" ask:hintLabel=")" android:keyEdgeFlags="right"/>
     </Row>
 
     <Row>
